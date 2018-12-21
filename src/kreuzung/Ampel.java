@@ -15,6 +15,10 @@ public class Ampel {
 		trasse2 = new int[trassenLänge];
 	}
 	
+	public Ampel(int nummer) {
+		new Ampel(nummer, 3);
+	}
+	
 	public void schalten() {
 		status = !status;
 	}
