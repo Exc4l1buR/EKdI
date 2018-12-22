@@ -23,6 +23,10 @@ public class Ampel {
 		status = !status;
 	}
 	
+	public void setStatus(boolean status) {
+		this.status = status;
+	}
+	
 	public void tick() {
 		trasse1[0] += Math.round(Math.random());
 		trasse2[0] += Math.round(Math.random());
@@ -46,6 +50,16 @@ public class Ampel {
 			}
 		}
 		nächster.tick();
+	}
+	
+	public boolean hatWartende() {
+		for (int i : trasse1) {
+			if (i != 0) return true;
+		}
+		for (int i : trasse2) {
+			if (i != 0) return true;
+		}
+		return false;
 	}
 	
 	public String toString() {
