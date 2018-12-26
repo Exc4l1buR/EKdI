@@ -28,8 +28,6 @@ public class Kreuzung {
 		boolean bas = false; // Bahn aus Süden
 		boolean ban = false; // Bahn aus Norden
 		int bahncounter = 0;
-		int bahnZeitverzoegerung = 0;
-		int wieVieleBahnen = 0;
 		int tickcounter = 0; // damit bei einer bahn alles zurückgesetzt wird
 
 		for (int i = 0; i <= 240; i++) {
@@ -58,6 +56,7 @@ public class Kreuzung {
 			}
 			if (ban || bas) {
 				a03.setStatus(true);
+				System.out.println("Bahn!");
 				a00.setStatus(false);
 				a02.setStatus(false);
 				a04.setStatus(false);
@@ -67,12 +66,11 @@ public class Kreuzung {
 				a01.setStatus(false);
 				a05.setStatus(false);
 				bahncounter++;
-				wieVieleBahnen++;
 
 			} else {
-				bahnZeitverzoegerung = 5 * wieVieleBahnen;
 				// horizontale Ampeln -> grün
-				if (tickcounter % (70 + bahnZeitverzoegerung) == 0) { // alle 70t
+				//System.out.println(tickcounter);
+				if (tickcounter % 70 == 0) { // alle 70t
 					a00.setStatus(true);
 					a02.setStatus(true);
 					a06.setStatus(true);
@@ -82,19 +80,21 @@ public class Kreuzung {
 
 				}
 				// horizontale Fußgänger -> rot
-				if (tickcounter % (70 - 2 + bahnZeitverzoegerung) == 10) { // alle 70t und 2t Puffer
+				if (tickcounter % (70 - 2) == 10) { // alle 70t und 2t Puffer
 					a00.setStatus(false);
 					a02.setStatus(false);
 					a06.setStatus(false);
 					a08.setStatus(false);
-				}
-				// horizontale Autos -> rot
-				if (i % (70 - 5 + bahnZeitverzoegerung) == 10) { // alle 70t und 5t puffer
+					
 					a05.setStatus(false);
 				}
+				// horizontale Autos -> rot
+				//if (i % (70 - 5) == 10) { // alle 70t und 5t puffer
+					//a05.setStatus(false);
+				//}
 
 				// vertikale Ampeln -> grün
-				if (tickcounter % (70 + bahnZeitverzoegerung) == 10) {
+				if (tickcounter % 70 == 10) {
 					a04.setStatus(true);
 					a0a.setStatus(true);
 
@@ -102,12 +102,12 @@ public class Kreuzung {
 
 				}
 				// vertikale Fußgänger -> rot
-				if (tickcounter % (70 - 2 + bahnZeitverzoegerung) == 20) {
+				if (tickcounter % (70 - 2) == 20) {
 					a04.setStatus(false);
 					a0a.setStatus(false);
 				}
 				// vertikale Autos -> rot
-				if (tickcounter % (70 - 5 + bahnZeitverzoegerung) == 0) {
+				if (tickcounter % (70 - 5) == 0) {
 					a01.setStatus(false);
 				}
 			}
@@ -117,8 +117,8 @@ public class Kreuzung {
 
 			a00.tick(a02);
 			a06.tick(a08);
+			
 			// CONSOLE OUT
-			if (i < 999) {
 				for (Ampel alle : alleAmpeln) {
 					System.out.println(alle.toString());
 					br.write(alle.toString());
@@ -126,7 +126,8 @@ public class Kreuzung {
 				}
 				System.out.println();
 				br.newLine();
-			}
+			
+			tickcounter++;
 		}
 		br.close();
 		fr.close();
