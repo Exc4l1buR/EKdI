@@ -246,8 +246,14 @@ public class Kreuzung {
 					br.write(alle.toString());	
 					
 					br.newLine();
-					if(a01.status==true&&a08.status==true||a01.status==true&&a06.status==true||a01.status==true&&a02.status==true||a01.status==true&&a00.status==true||a03.status==true&&a02.status==true||a03.status==true&&a00.status==true||a03.status==true&&a06.status==true||a03.status==true&&a08.status==true||a05.status==true&&a04.status==true||a05.status==true&&a0a.status==true||a01.status==true&&a03.status==true||a01.status==true&&a05.status==true||a03.status==true&&a05.status==true)
-                      System.out.println("Es gibt eine Kollision");
+					if(a01.status&&a08.status||a01.status&&a06.status||a01.status&&a02.status||
+					   a01.status&&a00.status||a03.status&&a02.status||a03.status&&a00.status||
+					   a03.status&&a06.status||a03.status&&a08.status||a05.status&&a04.status||
+					   a05.status&&a0a.status||a01.status&&a03.status||a01.status&&a05.status||
+					   a03.status&&a05.status)
+                      			System.out.println("Es gibt eine Kollision");
+					br.write("Es gibt eine Kollision");
+					br.newLine();
 				}
 
 				System.out.println();
