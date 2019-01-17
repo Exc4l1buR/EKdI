@@ -6,10 +6,10 @@ public class Ampel {
 	boolean status;
 	int nummer;
 
-	public Ampel(int nummer, int trassenL�nge) {
+	public Ampel(int nummer, int trassenLänge) {
 		this.nummer = nummer;
-		this.trasse1 = new int[trassenL�nge];
-		this.trasse2 = new int[trassenL�nge];
+		this.trasse1 = new int[trassenLänge];
+		this.trasse2 = new int[trassenLänge];
 	}
 
 	public Ampel(int nummer) {
@@ -45,12 +45,12 @@ public class Ampel {
 		
 	}
 
-	public void tick(Ampel n�chster) {
+	public void tick(Ampel nächster) {
 		this.trasse1[0] += Math.round(Math.random()*Math.random());
 		this.trasse2[0] += Math.round(Math.random()*Math.random());
 		if (this.status) {
-			n�chster.trasse1[0] += this.trasse1[trasse1.length - 1];
-			this.trasse2[0] += n�chster.trasse2[n�chster.trasse2.length - 1];
+			nächster.trasse1[0] += this.trasse1[trasse1.length - 1];
+			this.trasse2[0] += nächster.trasse2[nächster.trasse2.length - 1];
 			for (int i = trasse1.length - 1; i > 0; i--) {
 				this.trasse1[i] = this.trasse1[i - 1];
 				this.trasse2[i] = this.trasse2[i - 1];
@@ -63,7 +63,7 @@ public class Ampel {
 				trasse2[i] = trasse2[i - 1];
 			}
 		}
-		n�chster.tick();
+		nächster.tick();
 	}
 
 	public boolean hatWartende() {
@@ -79,7 +79,54 @@ public class Ampel {
 	}
 
 	public String toString() {
-		return ("Nummer: " + nummer + "| Status: " + (status ? "gr�n" : "rot") + "| Trasse 1: " + trasse1[0]
-				+ "| Trasse 2: " + trasse2[0]);
+		switch (nummer) {
+		case 0x00: return ("Nummer: " + nummer +
+				"\nTyp: Fußgänger" +
+				"\nStatus: " + (status?"grün":"rot") +
+				"\nOsten nach Westen: " + trasse1[0] +
+				"\nWesten nach Osten: " + trasse2[0]);
+		case 0x02: return ("Nummer: " + nummer +
+				"\nTyp: Fußgänger" +
+				"\nStatus: " + (status?"grün":"rot") +
+				"\nOsten nach Westen: " + trasse1[0] +
+				"\nWesten nach Osten: " + trasse2[0]);
+		case 0x04: return ("Nummer: " + nummer +
+				"\nTyp: Fußgänger" +
+				"\nStatus: " + (status?"grün":"rot") +
+				"\nNorden nach Süden: " + trasse1[0] +
+				"\nSüden nach Norden: " + trasse2[0]);
+		case 0x06: return ("Nummer: " + nummer +
+				"\nTyp: Fußgänger" +
+				"\nStatus: " + (status?"grün":"rot") +
+				"\nOsten nach Westen: " + trasse1[0] +
+				"\nWesten nach Osten: " + trasse2[0]);
+		case 0x08: return ("Nummer: " + nummer +
+				"\nTyp: Fußgänger" +
+				"\nStatus: " + (status?"grün":"rot") +
+				"\nOsten nach Westen: " + trasse1[0] +
+				"\nWesten nach Osten: " + trasse2[0]);
+		case 0x0a: return ("Nummer: " + nummer +
+				"\nTyp: Fußgänger" +
+				"\nStatus: " + (status?"grün":"rot") +
+				"\nNorden nach Süden: " + trasse1[0] +
+				"\nSüden nach Norden: " + trasse2[0]);
+		case 0x01: return ("Nummer: " + nummer +
+				"\nTyp: Auto" +
+				"\nStatus: " + (status?"grün":"rot") +
+				"\nNorden nach Süden: " + trasse1[0] +
+				"\nSüden nach Norden: " + trasse2[0]);
+		case 0x05: return ("Nummer: " + nummer +
+				"\nTyp: Auto" +
+				"\nStatus: " + (status?"grün":"rot") +
+				"\nOsten nach Westen: " + trasse1[0] +
+				"\nWesten nach Norden: " + trasse2[0]);
+		case 0x03: return ("Nummer: " + nummer +
+				"\nTyp: Bahn" +
+				"\nStatus: " + (status?"grün":"rot") +
+				"\nNorden nach Süden: " + trasse1[0] +
+				"\nSüden nach Norden: " + trasse2[0]);
+		default:
+			return "Error";
+		}
 	}
 }
